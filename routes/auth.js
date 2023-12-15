@@ -154,6 +154,7 @@ router.put("/changePassword", async (req, res) => {
   const { email, oldpassword, newpassword } = req.body;
   try {
     const user = await Admin.findOne({ email });
+    
     if (!user) {
       return res.status(400).json({ error: "User not found" });
     }

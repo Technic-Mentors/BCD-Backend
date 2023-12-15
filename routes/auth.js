@@ -154,10 +154,11 @@ router.put("/changePassword", async (req, res) => {
   const { email, oldpassword, newpassword } = req.body;
   try {
     const user = await Admin.findOne({ email });
-    
+
     if (!user) {
       return res.status(400).json({ error: "User not found" });
     }
+    
     const checkPassword = await bcrypt.compare(oldpassword, user.password);
     if (!checkPassword) {
       return res.status(400).json({ error: "old Password does not match" });
